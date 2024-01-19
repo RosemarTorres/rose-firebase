@@ -10,7 +10,7 @@ app.get('/', async(req, res) => {
  const querySnapshot=   await db.collection('productos').get();
 
  console.log(querySnapshot.docs[0].data());
-    res.send('hello');
+    res.send('Rosemar Torres C.I:30.961.767  seccion 3');
 });
 
 
