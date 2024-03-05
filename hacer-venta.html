@@ -27,6 +27,15 @@
         
         
     }
+
+    table{
+        background-color: transparent;
+        text-align: center;
+        border-collapse: collapse;
+        width: 100%;
+        
+        
+    }
     
     th, td{
         
@@ -170,18 +179,31 @@ input{
       <div class="container">
        
         <form id="form-venta">
-          <div class="mb-3">
-            <label for="modelo-venta" class="form-label">Modelo</label>
-            <select class="form-control" id="modelo-venta" required></select>
-          </div>
-          <div class="mb-3">
-            <label for="usuario-venta" class="form-label">Usuario</label>
-            <select class="form-control" id="usuario-venta" required></select>
-          </div>
-          <div class="mb-3">
-            <label for="marca-venta" class="form-label">Marca</label>
-            <select class="form-control" id="marca-venta" required></select>
-          </div>
+          <table class="tabled">
+            
+              <th>
+                <div class="mb-3">
+                  <label for="modelo-venta" class="form-label">Modelo</label>
+                  <select class="form-control" id="modelo-venta" required></select>
+                </div>
+              </th>
+                   <th>
+                    <div class="mb-3">
+                      <label for="usuario-venta" class="form-label">Usuario</label>
+                      <select class="form-control" id="usuario-venta" required></select>
+                    </div>
+                   </th>
+                    <th>
+                      <div class="mb-3">
+                        <label for="marca-venta" class="form-label">Marca</label>
+                        <select class="form-control" id="marca-venta" required></select>
+                      </div>
+            
+                    </th>
+            
+
+          </table>
+          
 
           <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
@@ -193,8 +215,8 @@ input{
         <thead class="table-dark">
           <tr>
             <th>Modelo</th>
-            <th>Marca</th>
             <th>Usuario</th>
+            <th>Marca</th>
             <th>Editar</th>
             <th>Eliminar</th>
           </tr>
