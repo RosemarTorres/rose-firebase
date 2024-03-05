@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Usuarios</title>
+
+
+  </head>
+  <style>
+      body {
+       background-color: #318371;
+       font-family: Arial;
+        text-align: center;
+        
+    }
+    #main-container{
+        margin: 100px auto;
+        width: 800px;
+        text-align: center;
+       
+    }
+    
+    
+    table{
+        background-color: white;
+        text-align: center;
+        border-collapse: collapse;
+        width: 100%;
+        
+        
+    }
+    
+    th, td{
+        
+        padding: 20px;
+        
+    }
+    thead{
+        background-color: #246355;
+        border-bottom: solid 5px #0F362D;
+        color: white ;
+    }
+    tr:nth-child(even){
+        background-color: #ddd;
+    }
+    
+    tr:hover td{
+        background-color: #369681;
+        color: white;
+    }
+    .centered {
+        text-align: center !important;
+        vertical-align: middle !important;
+    }
+          header{
+      width: 96%;
+      height: 100px;
+      border-bottom: dashed 0px rgb(125, 80, 80);
+      display: flex;  
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      
+    
+    }
+     h1{
+      color: rgb(8, 8, 8);
+      text-shadow: 7px 14px 16px rgba(28, 28, 28, 0.747);
+      border: rgb(212, 4, 4);
+    }
+    nav ul {
+      width:  100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      }
+      
+      nav ul li {
+      list-style: none;
+      }
+      
+      nav ul li a {
+        margin: auto;
+      padding: 50px 30px;
+      color: rgb(6, 6, 6);
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 14px;
+      font-family: Georgia, 'Times New Roman', Times, serif;;
+      }
+      nav ul li a:hover {
+      border-bottom:solid 1.5px rgb(0, 187, 255);
+      }
+     
+      @font-face {
+      font-family: "Rubik";
+      src: url("/fonts/Rubik.ttf");
+      }
+      
+      @font-face{
+      font-family: "Montserrat";
+      src: url("/fonts/Montserrat.ttf");
+      }
+    
+    /*_____________________________________*/
+    @import url(https://fonts.googleapis.com/css?family=Noto+Sans);
+    
+    button {
+  background-color: #4CAF50; /* Color de fondo */
+  border: none; /* Eliminar el borde */
+  color: white; /* Color del texto */
+  padding: 15px 32px; /* Relleno en el eje X e Y */
+  text-align: center; /* Alineación del texto */
+  text-decoration: none; /* Eliminar subrayado */
+  display: inline-block; /* Para que el botón se comporte como un elemento en línea */
+  font-size: 16px; /* Tamaño del texto */
+  margin: 4px 2px; /* Espacio entre elementos */
+  cursor: pointer; /* Cambiar el cursor a un puntero cuando se pasa sobre el botón */
+  border-radius: 12px; /* Redondear las esquinas del botón */
+}
+    
+
+input{
+      background-color: #fbfbfb; 
+      width: 408px; 
+      height: 40px; 
+      border-radius: 5px;  
+      border-style: solid; 
+      border-width: 1px; 
+      border-color: #00b7ff; 
+      margin-top: 10px;  
+      padding-left: 10px;
+      margin-bottom: 20px; 
+    }
+    
+    label{
+      display: block; 
+      float: center;  
+      font-size: 150%;
+      font-family: 'Times New Roman', Times, serif;
+    }
+    </style>
+     <header>
+      <h1>Agregar usuario</h1>
+      
+      <nav>
+        <ul>
+          <li>
+            <button type="button"  onclick="regresar()">
+              Regresar
+          </li>
+          
+    
+    
+    
+        </ul>
+      </nav>
+     </header>
+     <body>
+      <div class="container">
+        <!-- Formulario para usuarios -->
+        <div class="container">
+
+          <form id="form-usuario">
+            <div class="mb-3">
+              <label for="nombre-usuario" class="form-label"
+                >Nombre del Usuario</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="nombre-usuario"
+                required
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
+        </div>
+      </div>
+  
+      <div class="container" style="margin-top: 20px;">
+        <table id="tabla-usuario" class="table table-striped table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th>Usuario</th>
+              <th>Editar</th>
+              <th>Eliminar</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+  
+
+    <script type="module" src="/JavaScript/firebase.js"></script>
+    <script type="module" src="/JavaScript/usuario/add-usuario.js"></script>
+    <script type="module" src="/JavaScript/usuario/app.js"></script>
+    
+
+    <script type="module">
+      import { doc, db, updateDoc, deleteDoc } from "/JavaScript/firebase.js";
+
+      async function eliminarUsuario(id) {
+        await deleteDoc(doc(db, "usuarios", id));
+        //recargame la pagina
+        window.location.reload();
+      }
+
+      // Hacer la función eliminarUsuario globalmente accesible
+      window.eliminarUsuario = eliminarUsuario;
+
+      async function editarUsuario(id) {
+        const nuevoNombreUsuario = prompt(
+          "Por favor, introduce el nuevo nombre del usuario:"
+        );
+        if (nuevoNombreUsuario) {
+          try {
+            const refUsuario = doc(db, "usuarios", id);
+
+            await updateDoc(refUsuario, { name: nuevoNombreUsuario });
+            alert("¡Usuario actualizado exitosamente!");
+            //recargame la pagina
+            window.location.reload();
+          } catch (error) {
+            console.error("Error actualizando documento: ", error);
+          }
+        } else {
+          console.log("No se introdujo un nuevo nombre de usuario");
+          alert("No se hicieron cambios.");
+        }
+      }
+
+      // Hacer la función editarUsuario globalmente accesible
+      window.editarUsuario = editarUsuario;
+    </script>
+
+    <script>
+      function regresar() {
+        location.href = "/";
+      }
+    </script>
+  </body>
+</html>

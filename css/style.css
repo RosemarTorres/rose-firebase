@@ -1,0 +1,62 @@
+body {
+    background: #d3cce3; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #e9e4f0, #d3cce3); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #e9e4f0, #d3cce3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.centered {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+header{
+    width: 96%;
+    height: 100px;
+    border-bottom: dashed 0px rgb(125, 80, 80);
+    display: flex;  
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    
+  
+  }
+   h1{
+    color: white;
+    text-shadow: 7px 14px 16px rgba(28, 28, 28, 0.747);
+    border: white;
+  }
+  nav ul {
+    width:  100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    }
+    
+    nav ul li {
+    list-style: none;
+    }
+    
+    nav ul li a {
+      margin: auto;
+    padding: 50px 30px;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: "Montserrat";
+    }
+    nav ul li a:hover {
+    border-bottom:solid 1.5px white;
+    }
+   
+    @font-face {
+    font-family: "Rubik";
+    src: url("/fonts/Rubik.ttf");
+    }
+    
+    @font-face{
+    font-family: "Montserrat";
+    src: url("/fonts/Montserrat.ttf");
+    }
+  
+  /*_____________________________________*/
+  @import url(https://fonts.googleapis.com/css?family=Noto+Sans);

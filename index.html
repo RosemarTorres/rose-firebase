@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>DataTables.js</title>
+
+    </head>
+
+    <style>
+        body {
+       background-color: #318371;
+       font-family: Arial;
+        text-align: center;
+        
+    }
+    #main-container{
+        margin: 100px auto;
+        width: 800px;
+        text-align: center;
+       
+    }
+    
+    
+    table{
+        background-color: white;
+        text-align: center;
+        border-collapse: collapse;
+        width: 100%;
+        
+        
+    }
+    
+    th, td{
+        
+        padding: 20px;
+        
+    }
+    thead{
+        background-color: #246355;
+        border-bottom: solid 5px #0F362D;
+        color: white ;
+    }
+    tr:nth-child(even){
+        background-color: #ddd;
+    }
+    
+    tr:hover td{
+        background-color: #369681;
+        color: white;
+    }
+    .centered {
+        text-align: center !important;
+        vertical-align: middle !important;
+    }
+          header{
+      width: 96%;
+      height: 100px;
+      border-bottom: dashed 0px rgb(125, 80, 80);
+      display: flex;  
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      
+    
+    }
+     h1{
+      color: rgb(8, 8, 8);
+      text-shadow: 7px 14px 16px rgba(28, 28, 28, 0.747);
+      border: rgb(212, 4, 4);
+    }
+    nav ul {
+      width:  100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      }
+      
+      nav ul li {
+      list-style: none;
+      }
+      
+      nav ul li a {
+        margin: auto;
+      padding: 50px 30px;
+      color: rgb(6, 6, 6);
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 14px;
+      font-family: Georgia, 'Times New Roman', Times, serif;;
+      }
+      nav ul li a:hover {
+      border-bottom:solid 1.5px rgb(0, 187, 255);
+      }
+     
+      @font-face {
+      font-family: "Rubik";
+      src: url("/fonts/Rubik.ttf");
+      }
+      
+      @font-face{
+      font-family: "Montserrat";
+      src: url("/fonts/Montserrat.ttf");
+      }
+    
+    /*_____________________________________*/
+    @import url(https://fonts.googleapis.com/css?family=Noto+Sans);
+    </style>
+    <header>
+      <h1>Base de Datos</h1>
+      
+      <nav>
+        <ul>
+            <li>
+              <a href="add-marca.html" class=""
+              >Agregar Marca</a
+            > 
+  
+            <a href="add-carros.html" class=""
+              >Agregar Carros</a
+            >
+            <a href="hacer-venta.html" class="">Vender</a>
+            <a href="add-usuarios.html" class=""
+              >Agregar Usuarios</a
+            >
+
+            </li>
+              
+                
+          
+    
+    
+    
+        </ul>
+      </nav>
+     </header>
+     <br>
+    <body>
+        <div class="container my-4">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <table id="car-table" class="table table-striped">
+
+                        <thead>
+                            <tr>
+                                <th class="centered">Modelo</th>
+                                <th class="centered">Marca</th>
+                                <th class="centered">Vendido</th>
+                                <th class="centered">Usuario</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody_users"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+        <!-- jQuery -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- DataTable -->
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+        <!-- Custom JS -->
+        <script src=""></script>
+
+
+
+        
+    <script type="module" src="/JavaScript/firebase.js"></script>
+
+    <script type="module">
+      import { collection, getDocs, db, doc } from "/JavaScript/firebase.js";
+
+      async function populateTable() {
+        const querySnapshot = await getDocs(collection(db, "ventas"));
+        const tableBody = document.querySelector("#car-table tbody");
+
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+
+          const row = tableBody.insertRow();
+
+          const modeloCell = row.insertCell();
+          modeloCell.textContent = data.modelo;
+
+          const marcaCell = row.insertCell();
+          marcaCell.textContent = data.marca;
+
+          const vendidoCell = row.insertCell();
+          vendidoCell.textContent = data.vendida ? "Sí" : "No";
+
+          const vendidoACell = row.insertCell();
+          vendidoACell.textContent = data.usuario || "N/A";
+        });
+      }
+
+      populateTable();
+    </script>
+    
+  </body>
+</html>
+    </body>
+</html>
